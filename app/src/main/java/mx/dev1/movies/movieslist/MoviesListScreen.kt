@@ -1,5 +1,6 @@
 package mx.dev1.movies.movieslist
 
+import android.graphics.Paint.Align
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -28,13 +29,14 @@ fun MoviesListScreen(
 ) {
     val movieUiState by viewModel.movieListUiState.collectAsState()
 
-    if(movieUiState.isLoading)
+    if(movieUiState.isLoading) {
         Box(
             contentAlignment = Alignment.Center,
             modifier = Modifier.fillMaxSize()
         ) {
             CircularProgressIndicator()
         }
+    }
 
     LazyVerticalStaggeredGrid(
         columns = StaggeredGridCells.Fixed(2),
@@ -58,9 +60,17 @@ fun MoviesListScreen(
             .fillMaxSize()
             .padding(horizontal = 2.dp, vertical = 4.dp)
     )
+
+    if(movieUiState.errorEnum != null) {
+        MovieError(
+            errorMessage = movieUiState.errorEnum?.message.toString()
+        ) {
+            viewModel.getMovies()
+        }
+    }
 }
 
-@Preview
+@Preview(showBackground = true)
 @Composable
 fun MoviesListScreenPreview() {
     MoviesListScreen()

@@ -1,5 +1,6 @@
 package mx.dev1.movies.movieslist
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
@@ -13,6 +14,8 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import mx.dev1.movies.data.MovieUiState
 import mx.dev1.movies.data.MoviesRepository
+import mx.dev1.movies.data.remote.RetrofitClient
+import java.net.ConnectException
 
 class MoviesListViewModel(
     private val repository: MoviesRepository
@@ -24,23 +27,37 @@ class MoviesListViewModel(
         getMovies()
     }
 
-    private fun getMovies() {
+    fun getMovies() {
         viewModelScope.launch {
-            movieListUiStateFlow.update {
-                it.copy(
-                    isLoading = true
-                )
-            }
+            try {
+                movieListUiStateFlow.update {
+                    it.copy(
+                        isLoading = true
+                    )
+                }
 
-            delay(2000L) // Response simulation, please delete
+                delay(2000L)
+                val movies =  repository.getMovies()
 
-            val movies =  repository.getMovies()// Change to repository implementation
+                movieListUiStateFlow.update { moviesUiState ->
+                    moviesUiState.copy(
+                        movieList = movies,
+                        isLoading = false,
+                        errorEnum = null
+                    )
+                }
+            } catch(e: Exception) {
+                val errorEnum = when {
+                    e is ConnectException -> ErrorMessage.INTERNET_CONNECTION
+                    else -> ErrorMessage.DEFAULT
+                }
 
-            movieListUiStateFlow.update { moviesUiState ->
-                moviesUiState.copy(
-                    movieList = movies,
-                    isLoading = false
-                )
+                movieListUiStateFlow.update { moviesUiState ->
+                    moviesUiState.copy(
+                        isLoading = false,
+                        errorEnum = errorEnum
+                    )
+                }
             }
         }
     }
@@ -49,7 +66,9 @@ class MoviesListViewModel(
         val Factory: ViewModelProvider.Factory = viewModelFactory {
             initializer {
                 MoviesListViewModel (
-                    MoviesRepository()
+                    MoviesRepository(
+                        RetrofitClient.service
+                    )
                 )
             }
         }

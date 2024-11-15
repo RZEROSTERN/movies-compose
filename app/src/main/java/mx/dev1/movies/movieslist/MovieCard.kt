@@ -20,7 +20,6 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
-import mx.dev1.movies.data.mockMovieList
 import mx.dev1.movies.models.Movie
 
 @Composable
@@ -62,7 +61,11 @@ fun MovieCard(
 )
 fun MovieCardPreview() {
     MovieCard(
-        movie = mockMovieList.first(),
+        movie = Movie(
+            0, "Oppenheimer",
+            "https://static1.srcdn.com/wordpress/wp-content/uploads/2023/05/oppenheimer-poster.jpg",
+            false
+        ),
         isFavorite = true,
         onFavoriteClick = {}
     )

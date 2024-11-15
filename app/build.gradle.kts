@@ -20,7 +20,7 @@ android {
         versionCode = 1
         versionName = "1.0"
 
-        buildConfigField("String", "API_KEY", properties["TMDB_API_KEY"] as String)
+        buildConfigField("String", "API_KEY", "\"" + properties["TMDB_API_KEY"] as String + "\"")
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {

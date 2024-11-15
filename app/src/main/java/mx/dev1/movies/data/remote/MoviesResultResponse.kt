@@ -7,7 +7,7 @@ data class MoviesResultResponse(
     val page: Int,
     @Json(name = "total_pages")
     val totalPages: Long,
-    @Json(name = "totalResults")
+    @Json(name = "total_results")
     val totalResults: Long,
-    val result: List<MoviesDetailResponse>
+    val results: List<MoviesDetailResponse>
 )
