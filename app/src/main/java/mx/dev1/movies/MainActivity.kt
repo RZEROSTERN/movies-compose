@@ -3,12 +3,12 @@ package mx.dev1.movies
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Surface
-import androidx.compose.ui.Modifier
-import mx.dev1.movies.movieslist.MoviesListScreen
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import mx.dev1.movies.presentation.detail.DetailsScreen
+import mx.dev1.movies.presentation.home.MoviesListScreen
 import mx.dev1.movies.ui.theme.MoviesTheme
 
 
@@ -17,14 +17,26 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             MoviesTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { it
-                    Surface(
-                        modifier = Modifier.fillMaxSize(),
-                        color = MaterialTheme.colorScheme.background,
+                val navController = rememberNavController()
+
+                Scaffold { paddingValues ->
+                    NavHost(
+                        navController = navController,
+                        startDestination = "movieList"
                     ) {
-                        MoviesListScreen()
+                        composable(route = "movieList") {
+                            MoviesListScreen(
+                                onMovieClick = { movie ->
+                                    navController.navigate("details")
+                                }
+                            )
+                        }
+                        composable(route = "details") {
+                            DetailsScreen()
+                        }
                     }
                 }
+
             }
         }
     }

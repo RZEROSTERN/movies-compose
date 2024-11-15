@@ -1,4 +1,4 @@
-package mx.dev1.movies.movieslist
+package mx.dev1.movies.presentation.home
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -20,9 +20,11 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import mx.dev1.movies.models.Movie
 
 @Composable
 fun MoviesListScreen(
+    onMovieClick: (Movie) -> Unit,
     viewModel: MoviesListViewModel = viewModel(
         factory = MoviesListViewModel.Factory
     )
@@ -52,6 +54,9 @@ fun MoviesListScreen(
                     isFavorite = isFavorite,
                     onFavoriteClick = {
                         isFavorite = !isFavorite
+                    },
+                    onMovieClick = { movie ->
+                        onMovieClick(movie)
                     }
                 )
             }
@@ -73,5 +78,7 @@ fun MoviesListScreen(
 @Preview(showBackground = true)
 @Composable
 fun MoviesListScreenPreview() {
-    MoviesListScreen()
+    MoviesListScreen(
+        onMovieClick = {}
+    )
 }

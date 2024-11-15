@@ -1,4 +1,4 @@
-package mx.dev1.movies.movieslist
+package mx.dev1.movies.presentation.home
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
@@ -26,9 +26,13 @@ import mx.dev1.movies.models.Movie
 fun MovieCard(
     movie: Movie,
     isFavorite: Boolean,
-    onFavoriteClick: () -> Unit
+    onFavoriteClick: () -> Unit,
+    onMovieClick: (Movie) -> Unit
 ) {
     Card(
+        onClick = {
+            onMovieClick(movie)
+        },
         elevation = CardDefaults.cardElevation(2.dp)
     ) {
         Box(modifier = Modifier.fillMaxSize()) {
@@ -67,6 +71,7 @@ fun MovieCardPreview() {
             false
         ),
         isFavorite = true,
-        onFavoriteClick = {}
+        onFavoriteClick = {},
+        onMovieClick = {}
     )
 }

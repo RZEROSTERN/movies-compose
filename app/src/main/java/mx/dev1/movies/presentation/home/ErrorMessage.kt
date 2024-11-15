@@ -1,4 +1,4 @@
-package mx.dev1.movies.movieslist
+package mx.dev1.movies.presentation.home
 
 import androidx.annotation.StringRes
 import mx.dev1.movies.R

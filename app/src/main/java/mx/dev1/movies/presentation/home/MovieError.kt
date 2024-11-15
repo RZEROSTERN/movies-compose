@@ -1,4 +1,4 @@
-package mx.dev1.movies.movieslist
+package mx.dev1.movies.presentation.home
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column

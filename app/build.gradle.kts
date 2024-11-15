@@ -73,6 +73,7 @@ dependencies {
     implementation(libs.retrofit)
     implementation(libs.retrofit.convertermoshi)
     implementation(libs.moshi)
+    implementation(libs.androidx.navigation.compose)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
