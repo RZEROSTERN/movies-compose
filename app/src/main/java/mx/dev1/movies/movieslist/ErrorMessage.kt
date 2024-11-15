@@ -1,6 +1,9 @@
 package mx.dev1.movies.movieslist
 
-enum class ErrorMessage(val message: String) {
-    INTERNET_CONNECTION("Ocurrió un error, verifica tu conexión"),
-    DEFAULT("Ocurrió un error desconocido")
+import androidx.annotation.StringRes
+import mx.dev1.movies.R
+
+enum class ErrorMessage(@StringRes val message: Int) {
+    INTERNET_CONNECTION(R.string.network_error),
+    DEFAULT(R.string.default_error)
 }
