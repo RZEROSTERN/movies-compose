@@ -25,9 +25,7 @@ import mx.dev1.movies.models.Movie
 @Composable
 fun MoviesListScreen(
     onMovieClick: (Movie) -> Unit,
-    viewModel: MoviesListViewModel = viewModel(
-        factory = MoviesListViewModel.Factory
-    )
+    viewModel: MoviesListViewModel
 ) {
     val movieUiState by viewModel.movieListUiState.collectAsState()
 
@@ -79,6 +77,7 @@ fun MoviesListScreen(
 @Composable
 fun MoviesListScreenPreview() {
     MoviesListScreen(
-        onMovieClick = {}
+        onMovieClick = {},
+        viewModel = viewModel()
     )
 }

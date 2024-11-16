@@ -7,15 +7,5 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 
 class RetrofitClient {
     companion object {
-        private val moshi = Moshi.Builder()
-            .add(KotlinJsonAdapterFactory())
-            .build()
-
-        private val retrofit = Retrofit.Builder()
-            .baseUrl("https://api.themoviedb.org/")
-            .addConverterFactory(MoshiConverterFactory.create(moshi))
-            .build()
-        
-        val service: MovieDbApi = retrofit.create(MovieDbApi::class.java)   
     }
 }

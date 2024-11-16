@@ -1,5 +1,6 @@
 package mx.dev1.movies.data.remote
 
+import dagger.Provides
 import mx.dev1.movies.BuildConfig
 import retrofit2.http.GET
 import retrofit2.http.Query

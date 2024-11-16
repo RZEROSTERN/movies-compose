@@ -3,6 +3,8 @@ import java.util.Properties
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
+    id("kotlin-kapt")
+    alias(libs.plugins.hilt)
 }
 
 val properties = Properties().apply {
@@ -74,6 +76,8 @@ dependencies {
     implementation(libs.retrofit.convertermoshi)
     implementation(libs.moshi)
     implementation(libs.androidx.navigation.compose)
+    implementation(libs.hilt)
+    kapt(libs.hilt.kapt)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

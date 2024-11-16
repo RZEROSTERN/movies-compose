@@ -3,6 +3,7 @@ package mx.dev1.movies
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.viewModels
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
@@ -18,6 +19,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 import androidx.navigation.NavType
@@ -26,17 +28,21 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import dagger.hilt.android.AndroidEntryPoint
 import mx.dev1.movies.navigation.MainNavigationBar
 import mx.dev1.movies.navigation.MainNavigationItem
 import mx.dev1.movies.navigation.Routes
 import mx.dev1.movies.presentation.detail.DetailsScreen
 import mx.dev1.movies.presentation.home.MoviesListScreen
+import mx.dev1.movies.presentation.home.MoviesListViewModel
 import mx.dev1.movies.ui.theme.MoviesTheme
 
-
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val viewModel: MoviesListViewModel by viewModels()
+
         setContent {
             MoviesTheme {
                 val navController = rememberNavController()
@@ -63,7 +69,8 @@ class MainActivity : ComponentActivity() {
                             MoviesListScreen(
                                 onMovieClick = { movie ->
                                     navController.navigate(Routes.DetailsScreen + "/${movie.id}")
-                                }
+                                },
+                                viewModel = viewModel
                             )
                         }
                         composable(route = Routes.FavoritesScreen) {
