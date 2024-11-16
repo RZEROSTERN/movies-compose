@@ -8,14 +8,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 
 @Composable
-fun DetailsScreen() {
+fun DetailsScreen(
+    movieId: String?
+) {
     Box(modifier = Modifier.fillMaxSize()) {
-        Text("Details")
+        Text("Details ${movieId}")
     }
 }
 
 @Preview(showBackground = true)
 @Composable
 fun DetailsScreenPreview() {
-    DetailsScreen()
+    DetailsScreen("1")
 }
