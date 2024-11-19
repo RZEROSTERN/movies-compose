@@ -9,5 +9,13 @@ data class MoviesResultResponse(
     val totalPages: Long,
     @Json(name = "total_results")
     val totalResults: Long,
-    val results: List<MoviesDetailResponse>
+    val results: List<MovieDetailResponse>
+)
+
+data class MovieDetailResponse(
+    @Json(name = "id") val id: Int,
+    @Json(name = "title") val title: String,
+    @Json(name = "vote_average") val voteAverage: Float,
+    @Json(name = "overview") val overview: String,
+    @Json(name = "poster_path") val posterPath: String,
 )

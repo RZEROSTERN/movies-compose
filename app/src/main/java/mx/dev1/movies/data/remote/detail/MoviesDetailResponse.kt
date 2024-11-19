@@ -3,28 +3,28 @@ package mx.dev1.movies.data.remote.detail
 import com.squareup.moshi.Json
 
 data class MoviesDetailResponse(
-    val adult: Boolean,
     @Json(name = "backdrop_path")
-    val backdropPath: String,
-    val genres: List<Genre> = emptyList(),
-    val id: Int,
-    @Json(name = "original_language")
-    val originalLanguage: String,
-    @Json(name = "original_title")
-    val originalTitle: String,
-    val overview: String,
-    val popularity: Float,
+    var backdropPath: String,
+    @Json(name = "genres")
+    var genres: List<Genre>,
+    @Json(name = "id")
+    var id: Int,
+    @Json(name = "overview")
+    var overview: String,
+    @Json(name = "popularity")
+    var popularity: Double,
     @Json(name = "poster_path")
-    val posterPath: String,
+    var posterPath: String,
     @Json(name = "release_date")
-    val releaseDate: String,
-    val revenue: Long = 0L,
-    val runtime: Int = 0,
-    val tagline: String = "",
-    val title: String,
-    val video: Boolean,
+    var releaseDate: String,
+    @Json(name = "tagline")
+    var tagline: String,
+    @Json(name = "title")
+    var title: String,
+    @Json(name = "video")
+    var video: Boolean,
     @Json(name = "vote_average")
-    val voteAverage: String,
-    @Json(name = "vote_count")
-    val voteCount: String
+    var voteAverage: Double,
+    @Json(name = "runtime")
+    var runtime: Int
 )

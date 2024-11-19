@@ -15,7 +15,6 @@ fun MoviesResultResponse.toMovieModelList() : List<Movie> = this.results.map { m
 
 fun MoviesDetailResponse.toMovieDetail() : MovieDetail = MovieDetail (
     id = this.id,
-    adult = this.adult,
     title = this.title,
     posterPath = "$BASE_IMAGE_URL${this.posterPath}",
     overview = this.overview,
@@ -24,11 +23,7 @@ fun MoviesDetailResponse.toMovieDetail() : MovieDetail = MovieDetail (
     popularity = this.popularity,
     tagline = this.tagline,
     voteAverage = this.voteAverage,
-    voteCount = this.voteCount,
     video = this.video,
     backdropPath = "$BASE_IMAGE_URL${this.backdropPath}",
-    originalLanguage = this.originalLanguage,
-    originalTitle = this.originalTitle,
-    revenue = this.revenue,
     runtime = this.runtime
 )

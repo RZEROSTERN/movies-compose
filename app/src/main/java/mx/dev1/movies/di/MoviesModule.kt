@@ -7,16 +7,21 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import mx.dev1.movies.BuildConfig
 import mx.dev1.movies.data.remote.MovieDbApi
 import mx.dev1.movies.data.repository.MoviesRepository
 import mx.dev1.movies.data.repository.MoviesRepositoryImpl
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
+import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
 class MoviesModule {
+    private val okHttpClient = initOkHttpClient()
     @Singleton
     @Provides
     fun getRetrofit() : Retrofit {
@@ -25,9 +30,27 @@ class MoviesModule {
             .build()
 
         return Retrofit.Builder()
-            .baseUrl("https://api.themoviedb.org/")
+            .baseUrl("https://api.themoviedb.org/") // Please change to constants
+            .client(okHttpClient)
             .addConverterFactory(MoshiConverterFactory.create(moshi))
             .build()
+    }
+
+    @Provides
+    @Singleton
+    fun initOkHttpClient(): OkHttpClient {
+        val httpClient: OkHttpClient.Builder = OkHttpClient().newBuilder()
+            .connectTimeout(30, TimeUnit.SECONDS) // Please change to constants
+            .readTimeout(30, TimeUnit.SECONDS)
+            .writeTimeout(30, TimeUnit.SECONDS)
+
+        if(BuildConfig.DEBUG) {
+            val interceptor = HttpLoggingInterceptor()
+            interceptor.level = HttpLoggingInterceptor.Level.BODY
+            httpClient.addInterceptor(interceptor)
+        }
+
+        return httpClient.build()
     }
 
     @Singleton

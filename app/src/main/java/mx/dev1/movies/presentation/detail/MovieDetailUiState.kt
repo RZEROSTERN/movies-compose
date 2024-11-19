@@ -1,4 +1,4 @@
-package mx.dev1.movies.data
+package mx.dev1.movies.presentation.detail
 
 import mx.dev1.movies.models.MovieDetail
 import mx.dev1.movies.presentation.home.ErrorMessage

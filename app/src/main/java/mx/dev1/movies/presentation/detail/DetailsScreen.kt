@@ -13,15 +13,16 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
+import mx.dev1.movies.presentation.detail.components.MovieDetailsContent
 import mx.dev1.movies.presentation.home.MoviesListViewModel
 
 @Composable
 fun DetailsScreen(
-    movieId: String,
+    movieId: String?,
     viewModel: MovieDetailsViewModel
 ) {
     LaunchedEffect(movieId) {
-        viewModel.getMovieDetails(movieId)
+        viewModel.getMovieDetails(movieId.orEmpty())
     }
 
     val movieDetailsUiState by viewModel.movieDetailUiState.collectAsState()
@@ -32,17 +33,15 @@ fun DetailsScreen(
                 Log.d("DEBUG", "DetailsScreen: ${movieDetailsUiState.errorEnum?.message}")
             }
         }
+
         if(movieDetailsUiState.isLoading) {
-            Box(
-                contentAlignment = Alignment.Center,
-                modifier = Modifier.fillMaxSize()
-            ) {
-                CircularProgressIndicator()
-            }
-        } else {
-            Text(
-                text = "Movie ID: $movieId"
+            CircularProgressIndicator(
+                modifier = Modifier.align(Alignment.Center)
             )
+        } else {
+            movieDetailsUiState.movieDetail?.let {
+                MovieDetailsContent(movieDetail = it)
+            }
         }
     }
 

@@ -15,6 +15,8 @@ moshi = "1.15.0"
 navigationCompose = "2.8.4"
 hilt = "2.51"
 hiltNavigationCompose = "1.2.0"
+okhttp = "4.12.0"
+icons = "1.6.8"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -34,12 +36,15 @@ androidx-material3 = { group = "androidx.compose.material3", name = "material3" 
 androidx-viewmodel-compose = { group = "androidx.lifecycle", name="lifecycle-viewmodel-compose", version.ref="viewmodel-compose"}
 androidx-navigation-compose = { group = "androidx.navigation", name="navigation-compose", version.ref="navigationCompose" }
 androidx-hilt-navigation-compose = { group = "androidx.hilt", name="hilt-navigation-compose", version.ref="hiltNavigationCompose"}
+androidx-material-icons-extended = { group = "androidx.compose.material", name="material-icons-extended-android", version.ref="icons"}
 coil = {group = "io.coil-kt", name = "coil-compose", version.ref="coil" }
 retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref="retrofit" }
 retrofit-convertermoshi = { group = "com.squareup.retrofit2", name="converter-moshi", version.ref="retrofit" }
 moshi = { group = "com.squareup.moshi", name="moshi-kotlin", version.ref="moshi" }
 hilt = { group = "com.google.dagger", name="hilt-android", version.ref="hilt" }
 hilt-kapt = { group = "com.google.dagger", name="hilt-android-compiler", version.ref="hilt"}
+okhttp = { group = "com.squareup.okhttp3", name="okhttp", version.ref="okhttp"}
+okhttp-logging-interceptor = { group = "com.squareup.okhttp3", name="logging-interceptor", version.ref="okhttp"}
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
