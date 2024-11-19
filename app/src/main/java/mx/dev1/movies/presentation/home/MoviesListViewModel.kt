@@ -1,5 +1,6 @@
 package mx.dev1.movies.presentation.home
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
@@ -50,6 +51,11 @@ class MoviesListViewModel @Inject constructor(
                     )
                 }
             } catch(e: Exception) {
+                Log.e("ERROR", e.message.toString())
+                e.cause?.stackTraceToString()?.let {
+                    Log.e("ERROR", it)
+                }
+
                 val errorEnum = when {
                     e is ConnectException -> ErrorMessage.INTERNET_CONNECTION
                     else -> ErrorMessage.DEFAULT

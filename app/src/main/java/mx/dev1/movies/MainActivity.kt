@@ -19,6 +19,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
@@ -33,6 +34,7 @@ import mx.dev1.movies.navigation.MainNavigationBar
 import mx.dev1.movies.navigation.MainNavigationItem
 import mx.dev1.movies.navigation.Routes
 import mx.dev1.movies.presentation.detail.DetailsScreen
+import mx.dev1.movies.presentation.detail.MovieDetailsViewModel
 import mx.dev1.movies.presentation.home.MoviesListScreen
 import mx.dev1.movies.presentation.home.MoviesListViewModel
 import mx.dev1.movies.ui.theme.MoviesTheme
@@ -41,7 +43,6 @@ import mx.dev1.movies.ui.theme.MoviesTheme
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val viewModel: MoviesListViewModel by viewModels()
 
         setContent {
             MoviesTheme {
@@ -70,7 +71,7 @@ class MainActivity : ComponentActivity() {
                                 onMovieClick = { movie ->
                                     navController.navigate(Routes.DetailsScreen + "/${movie.id}")
                                 },
-                                viewModel = viewModel
+                                viewModel = hiltViewModel<MoviesListViewModel>()
                             )
                         }
                         composable(route = Routes.FavoritesScreen) {
@@ -88,9 +89,13 @@ class MainActivity : ComponentActivity() {
                             )
                         ) {
                             val movieId = it.arguments?.getString("movieId")
-                            DetailsScreen(
-                                movieId = movieId
-                            )
+
+                            if (movieId != null) {
+                                DetailsScreen(
+                                    movieId = movieId,
+                                    viewModel = hiltViewModel<MovieDetailsViewModel>()
+                                )
+                            }
                         }
                     }
                 }

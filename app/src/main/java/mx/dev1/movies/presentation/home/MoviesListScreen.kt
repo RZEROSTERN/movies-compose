@@ -19,6 +19,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import mx.dev1.movies.models.Movie
 
@@ -78,6 +79,6 @@ fun MoviesListScreen(
 fun MoviesListScreenPreview() {
     MoviesListScreen(
         onMovieClick = {},
-        viewModel = viewModel()
+        viewModel = hiltViewModel<MoviesListViewModel>()
     )
 }

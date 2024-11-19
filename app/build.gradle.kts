@@ -76,6 +76,7 @@ dependencies {
     implementation(libs.retrofit.convertermoshi)
     implementation(libs.moshi)
     implementation(libs.androidx.navigation.compose)
+    implementation(libs.androidx.hilt.navigation.compose)
     implementation(libs.hilt)
     kapt(libs.hilt.kapt)
 

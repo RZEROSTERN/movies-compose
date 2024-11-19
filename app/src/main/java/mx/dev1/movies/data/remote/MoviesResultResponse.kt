@@ -1,7 +1,7 @@
 package mx.dev1.movies.data.remote
 
 import com.squareup.moshi.Json
-import mx.dev1.movies.models.Movie
+import mx.dev1.movies.data.remote.detail.MoviesDetailResponse
 
 data class MoviesResultResponse(
     val page: Int,
