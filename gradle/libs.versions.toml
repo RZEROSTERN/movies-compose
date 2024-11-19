@@ -16,7 +16,9 @@ navigationCompose = "2.8.4"
 hilt = "2.51"
 hiltNavigationCompose = "1.2.0"
 okhttp = "4.12.0"
-icons = "1.6.8"
+icons = "1.7.5"
+room = "2.6.1"
+roomCommon = "2.6.1"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -37,6 +39,9 @@ androidx-viewmodel-compose = { group = "androidx.lifecycle", name="lifecycle-vie
 androidx-navigation-compose = { group = "androidx.navigation", name="navigation-compose", version.ref="navigationCompose" }
 androidx-hilt-navigation-compose = { group = "androidx.hilt", name="hilt-navigation-compose", version.ref="hiltNavigationCompose"}
 androidx-material-icons-extended = { group = "androidx.compose.material", name="material-icons-extended-android", version.ref="icons"}
+androidx-room-kapt = { group = "androidx.room", name="room-compiler", version.ref="room"}
+androidx-room = { group = "androidx.room", name="room-runtime", version.ref="room"}
+androidx-room-ktx = { group = "androidx.room", name="room-ktx", version.ref="room"}
 coil = {group = "io.coil-kt", name = "coil-compose", version.ref="coil" }
 retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref="retrofit" }
 retrofit-convertermoshi = { group = "com.squareup.retrofit2", name="converter-moshi", version.ref="retrofit" }

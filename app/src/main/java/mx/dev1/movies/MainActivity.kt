@@ -61,7 +61,7 @@ class MainActivity : ComponentActivity() {
                             )
                         }
                     }
-                ) { paddingValues ->
+                ) { _ ->
                     NavHost(
                         navController = navController,
                         startDestination = Routes.HomeScreen
@@ -93,7 +93,10 @@ class MainActivity : ComponentActivity() {
                             if (movieId != null) {
                                 DetailsScreen(
                                     movieId = movieId,
-                                    viewModel = hiltViewModel<MovieDetailsViewModel>()
+                                    viewModel = hiltViewModel<MovieDetailsViewModel>(),
+                                    onBack = {
+                                        navController.navigateUp()
+                                    }
                                 )
                             }
                         }

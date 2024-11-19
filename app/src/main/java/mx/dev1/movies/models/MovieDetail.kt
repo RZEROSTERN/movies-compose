@@ -14,5 +14,6 @@ data class MovieDetail(
     var title: String,
     var video: Boolean,
     var voteAverage: Double,
-    var runtime: Int
+    var runtime: Int,
+    var isMovieInFavorites: Boolean = false
 )

@@ -19,7 +19,8 @@ import mx.dev1.movies.presentation.home.MoviesListViewModel
 @Composable
 fun DetailsScreen(
     movieId: String?,
-    viewModel: MovieDetailsViewModel
+    viewModel: MovieDetailsViewModel,
+    onBack: () -> Unit
 ) {
     LaunchedEffect(movieId) {
         viewModel.getMovieDetails(movieId.orEmpty())
@@ -40,7 +41,13 @@ fun DetailsScreen(
             )
         } else {
             movieDetailsUiState.movieDetail?.let {
-                MovieDetailsContent(movieDetail = it)
+                MovieDetailsContent(
+                    movieDetail = it,
+                    onBack = onBack,
+                    onUpdateFavorites = { movieDetail ->
+                        viewModel.updateFavorites(movieDetail = movieDetail)
+                    }
+                )
             }
         }
     }
@@ -53,6 +60,7 @@ fun DetailsScreen(
 fun DetailsScreenPreview() {
     DetailsScreen(
         movieId = "1",
-        viewModel = hiltViewModel<MovieDetailsViewModel>()
+        viewModel = hiltViewModel<MovieDetailsViewModel>(),
+        onBack = {}
     )
 }

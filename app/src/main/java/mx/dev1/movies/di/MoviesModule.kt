@@ -1,5 +1,7 @@
 package mx.dev1.movies.di
 
+import android.app.Application
+import androidx.room.Room
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Binds
@@ -8,6 +10,8 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import mx.dev1.movies.BuildConfig
+import mx.dev1.movies.data.local.FavoriteMovieDao
+import mx.dev1.movies.data.local.FavoriteMovieDatabase
 import mx.dev1.movies.data.remote.MovieDbApi
 import mx.dev1.movies.data.repository.MoviesRepository
 import mx.dev1.movies.data.repository.MoviesRepositoryImpl
@@ -22,6 +26,20 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 class MoviesModule {
     private val okHttpClient = initOkHttpClient()
+
+    @Singleton
+    @Provides
+    fun providesDatabase(application: Application): FavoriteMovieDatabase = Room.databaseBuilder(
+        context = application,
+        klass = FavoriteMovieDatabase::class.java,
+        name="favorite_movie_db"
+    ).build()
+
+    @Singleton
+    @Provides
+    fun providesFavoriteMovieDao(favoriteMovieDatabase: FavoriteMovieDatabase) : FavoriteMovieDao =
+        favoriteMovieDatabase.createFavoriteMovieDao()
+
     @Singleton
     @Provides
     fun getRetrofit() : Retrofit {

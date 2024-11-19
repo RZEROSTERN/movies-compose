@@ -81,7 +81,10 @@ dependencies {
     implementation(libs.okhttp)
     implementation(libs.okhttp.logging.interceptor)
     implementation(libs.androidx.material.icons.extended)
+    implementation(libs.androidx.room.ktx)
+    implementation(libs.androidx.room)
     kapt(libs.hilt.kapt)
+    kapt(libs.androidx.room.kapt)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

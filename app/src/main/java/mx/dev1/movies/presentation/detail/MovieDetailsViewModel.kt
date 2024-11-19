@@ -9,7 +9,9 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import mx.dev1.movies.data.local.FavoriteMovieEntity
 import mx.dev1.movies.data.repository.MoviesRepository
+import mx.dev1.movies.models.MovieDetail
 import mx.dev1.movies.presentation.home.ErrorMessage
 import java.net.ConnectException
 import javax.inject.Inject
@@ -28,8 +30,6 @@ class MovieDetailsViewModel @Inject constructor(
                 it.copy(isLoading = true, errorEnum = null)
             }
 
-            delay(1.seconds)
-
             try {
                 val movieDetail = repository.getMovieDetail(movieId = movieId)
 
@@ -40,6 +40,8 @@ class MovieDetailsViewModel @Inject constructor(
                         errorEnum = null
                     )
                 }
+
+                getFavoriteMovies()
             } catch(e: Exception) {
                 val errorEnum = when {
                     e is ConnectException -> ErrorMessage.INTERNET_CONNECTION
@@ -51,6 +53,48 @@ class MovieDetailsViewModel @Inject constructor(
                         isLoading = false,
                         errorEnum = errorEnum
                     )
+                }
+            }
+        }
+    }
+
+    fun updateFavorites(movieDetail: MovieDetail) {
+        viewModelScope.launch {
+            if(movieDetail.isMovieInFavorites) {
+                repository.deleteMovie(
+                    FavoriteMovieEntity(
+                        movieId = movieDetail.id.toString(),
+                        posterPath = movieDetail.posterPath
+                    )
+                )
+            } else {
+                repository.insertMovie(
+                    FavoriteMovieEntity(
+                        movieId = movieDetail.id.toString(),
+                        posterPath = movieDetail.posterPath
+                    )
+                )
+            }
+        }
+    }
+
+    private fun getFavoriteMovies() {
+        viewModelScope.launch {
+            repository.getFavoriteMovies().collect { favoriteMovieList ->
+                val currentMovieDetail = movieDetailUiState.value.movieDetail
+
+                currentMovieDetail?.let {
+                    val isMovieInFavorites = favoriteMovieList.any { movieData ->
+                        currentMovieDetail.id.toString() == movieData.movieId
+                    }
+
+                    movieDetailUiStateFlow.update {
+                        it.copy(
+                            movieDetail = currentMovieDetail.copy(
+                                isMovieInFavorites = isMovieInFavorites
+                            )
+                        )
+                    }
                 }
             }
         }

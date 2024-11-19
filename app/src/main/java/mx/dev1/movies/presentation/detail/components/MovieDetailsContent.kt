@@ -12,11 +12,19 @@ import mx.dev1.movies.models.MovieDetail
 
 @Composable
 fun MovieDetailsContent(
-    movieDetail: MovieDetail
+    movieDetail: MovieDetail,
+    onBack: () -> Unit,
+    onUpdateFavorites: (MovieDetail) -> Unit
 ) {
     Scaffold(
         topBar = {
-            MovieDetailsTopBar(movieDetail = movieDetail)
+            MovieDetailsTopBar(
+                movieDetail = movieDetail,
+                onBack = onBack,
+                onUpdateFavorites = {
+                    onUpdateFavorites(movieDetail)
+                }
+            )
         }
     ) { paddingValues ->
         Column(
