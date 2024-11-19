@@ -50,10 +50,6 @@ fun MoviesListScreen(
                 }
                 MovieCard(
                     movie = movie,
-                    isFavorite = isFavorite,
-                    onFavoriteClick = {
-                        isFavorite = !isFavorite
-                    },
                     onMovieClick = { movie ->
                         onMovieClick(movie)
                     }

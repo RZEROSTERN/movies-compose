@@ -25,8 +25,6 @@ import mx.dev1.movies.models.Movie
 @Composable
 fun MovieCard(
     movie: Movie,
-    isFavorite: Boolean,
-    onFavoriteClick: () -> Unit,
     onMovieClick: (Movie) -> Unit
 ) {
     Card(
@@ -43,18 +41,6 @@ fun MovieCard(
                     .fillMaxWidth()
                     .wrapContentHeight()
             )
-
-            Icon(
-                imageVector = if (isFavorite) Icons.Filled.Favorite else Icons.Outlined.FavoriteBorder,
-                contentDescription = "Favorite icon",
-                modifier = Modifier
-                    .size(50.dp)
-                    .padding(8.dp)
-                    .align(Alignment.TopEnd)
-                    .clickable {
-                        onFavoriteClick()
-                    }
-            )
         }
     }
 }
@@ -70,8 +56,6 @@ fun MovieCardPreview() {
             "https://static1.srcdn.com/wordpress/wp-content/uploads/2023/05/oppenheimer-poster.jpg",
             false
         ),
-        isFavorite = true,
-        onFavoriteClick = {},
         onMovieClick = {}
     )
 }

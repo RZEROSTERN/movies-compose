@@ -1,10 +1,8 @@
 package mx.dev1.movies.presentation.detail
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
@@ -15,7 +13,6 @@ import mx.dev1.movies.models.MovieDetail
 import mx.dev1.movies.presentation.home.ErrorMessage
 import java.net.ConnectException
 import javax.inject.Inject
-import kotlin.time.Duration.Companion.seconds
 
 @HiltViewModel
 class MovieDetailsViewModel @Inject constructor(

@@ -35,6 +35,7 @@ import mx.dev1.movies.navigation.MainNavigationItem
 import mx.dev1.movies.navigation.Routes
 import mx.dev1.movies.presentation.detail.DetailsScreen
 import mx.dev1.movies.presentation.detail.MovieDetailsViewModel
+import mx.dev1.movies.presentation.favorites.FavoriteMoviesScreen
 import mx.dev1.movies.presentation.home.MoviesListScreen
 import mx.dev1.movies.presentation.home.MoviesListViewModel
 import mx.dev1.movies.ui.theme.MoviesTheme
@@ -75,7 +76,11 @@ class MainActivity : ComponentActivity() {
                             )
                         }
                         composable(route = Routes.FavoritesScreen) {
-
+                            FavoriteMoviesScreen(
+                                navigateToDetails = { movie ->
+                                    navController.navigate(Routes.FavoritesScreen)
+                                }
+                            )
                         }
                         composable(route = Routes.NowPlayingScreen) {
 
@@ -102,7 +107,6 @@ class MainActivity : ComponentActivity() {
                         }
                     }
                 }
-
             }
         }
     }
