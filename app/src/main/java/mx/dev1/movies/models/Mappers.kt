@@ -33,3 +33,8 @@ fun FavoriteMovieEntity.transformToMovieModel() : Movie = Movie(
     id = this.movieId.toInt(),
     imageUrl = this.posterPath
 )
+
+fun Movie.transformToMovieEntity() : FavoriteMovieEntity = FavoriteMovieEntity(
+    movieId = this.id.toString(),
+    posterPath = this.imageUrl
+)

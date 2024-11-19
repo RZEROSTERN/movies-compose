@@ -45,11 +45,6 @@ class MoviesListViewModel @Inject constructor(
                     )
                 }
             } catch(e: Exception) {
-                Log.e("ERROR", e.message.toString())
-                e.cause?.stackTraceToString()?.let {
-                    Log.e("ERROR", it)
-                }
-
                 val errorEnum = when {
                     e is ConnectException -> ErrorMessage.INTERNET_CONNECTION
                     else -> ErrorMessage.DEFAULT

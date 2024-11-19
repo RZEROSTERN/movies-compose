@@ -2,4 +2,5 @@
     <string name="app_name">Movies</string>
     <string name="network_error">Ocurrió un error, verifica tu conexión</string>
     <string name="default_error">Ocurrió un error desconocido</string>
+    <string name="database_error">Hubo un error inesperado en la base de datos local</string>
 </resources>

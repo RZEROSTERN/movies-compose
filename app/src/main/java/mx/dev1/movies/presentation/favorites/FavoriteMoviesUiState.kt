@@ -6,5 +6,5 @@ import mx.dev1.movies.presentation.home.ErrorMessage
 data class FavoriteMoviesUiState(
     val isLoading: Boolean = false,
     val movieList: List<Movie> = emptyList(),
-    val errorMessage: ErrorMessage? = null
+    val errorEnum: ErrorMessage? = null
 )
