@@ -5,6 +5,7 @@ plugins {
     alias(libs.plugins.jetbrains.kotlin.android)
     id("kotlin-kapt")
     alias(libs.plugins.hilt)
+    alias(libs.plugins.kotlin.compose)
 }
 
 val properties = Properties().apply {
@@ -13,7 +14,7 @@ val properties = Properties().apply {
 
 android {
     namespace = "mx.dev1.movies"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "mx.dev1.movies"
@@ -52,11 +53,6 @@ android {
     }
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.1"
-    }
-    packaging {
-        resources {
-            excludes += "/META-INF/{AL2.0,LGPL2.1}"
-        }
     }
 }
 

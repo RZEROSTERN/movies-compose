@@ -13,7 +13,7 @@ import androidx.compose.foundation.lazy.staggeredgrid.items
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.SwipeToDismiss
+import androidx.compose.material3.SwipeToDismissBox
 import androidx.compose.material3.SwipeToDismissBoxValue
 import androidx.compose.material3.Text
 import androidx.compose.material3.rememberSwipeToDismissBoxState
@@ -75,22 +75,17 @@ fun FavoriteMoviesScreen(
                                 }
                             )
 
-                            /**
-                             * DEPRECATED
-                             * We should change it for new implementation in Material 3
-                             */
-                            SwipeToDismiss(
+                            SwipeToDismissBox(
                                 state = dismissState,
-                                background = {},
-                                dismissContent = {
-                                    MovieCard(
-                                        movie = movie,
-                                        onMovieClick = { movieClicked ->
-                                            navigateToDetails(movieClicked)
-                                        }
-                                    )
-                                }
-                            )
+                                backgroundContent = {},
+                            ) {
+                                MovieCard(
+                                    movie = movie,
+                                    onMovieClick = { movieClicked ->
+                                        navigateToDetails(movieClicked)
+                                    }
+                                )
+                            }
                         }
                     }
                 )
